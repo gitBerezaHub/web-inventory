@@ -7,11 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div
-    class="item-1"
-    v-if="props.id == 1"
-    @click="() => console.log('open')"
-  ></div>
+  <div class="item-1" v-if="props.id == 1" @click="$emit('openModal')"></div>
   <div class="item-2" v-if="props.id == 2"></div>
   <div class="item-3" v-if="props.id == 3"></div>
 </template>
@@ -23,6 +19,7 @@ const props = defineProps({
   width: 6vw;
   height: 6vw;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .item-1 {

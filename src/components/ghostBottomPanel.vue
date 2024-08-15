@@ -3,7 +3,7 @@
 <template>
   <div class="wrapper">
     <div class="text-skeleton"></div>
-    <img src="@/assets/close.svg" alt="" class="close-svg" />
+    <img src="@/assets/close.svg" alt="" />
   </div>
 </template>
 
@@ -24,9 +24,5 @@
   height: 50%;
   border-radius: 12px;
   background: linear-gradient(90deg, #3c3c3c 0%, #444444 51.04%, #333333 100%);
-}
-
-.close-svg {
-  height: 25%;
 }
 </style>
