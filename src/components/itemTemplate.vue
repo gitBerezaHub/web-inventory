@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, PropType } from "vue";
+interface ItemInterface {
+  id: number;
+  color: string;
+  quantity: number;
+  position: number;
+}
 
 const props = defineProps({
-  id: Number,
+  item: {
+    type: Object as PropType<ItemInterface>,
+    required: true,
+  },
 });
 </script>
 
 <template>
-  <div class="item-1" v-if="props.id == 1" @click="$emit('openModal')"></div>
-  <div class="item-2" v-if="props.id == 2"></div>
-  <div class="item-3" v-if="props.id == 3"></div>
+  <div
+    class="item"
+    @click="$emit('openModal', props.item?.color)"
+    :style="`background-color: ${props.item?.color}`"
+  >
+    {{ props.item.quantity }}
+  </div>
 </template>
 
 <style scoped lang="scss">
-.item-1,
-.item-2,
-.item-3 {
+.item {
   width: 6vw;
   height: 6vw;
   border-radius: 6px;
   cursor: pointer;
-}
-
-.item-1 {
   background-color: #7faa65;
-}
-
-.item-2 {
-  background-color: #aa9765;
-}
-
-.item-3 {
-  background-color: #656caa;
 }
 </style>

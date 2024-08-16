@@ -2,45 +2,36 @@
 import ItemTemplate from "@/components/itemTemplate.vue";
 import SideModal from "@/components/sideModal.vue";
 import { ref } from "vue";
+import { useItemStore } from "@/store/itemStore";
+import { storeToRefs } from "pinia";
 
 const isModalOpen = ref(false);
-function openModal() {
+const receivedColor = ref("#ffffff");
+
+function openModal(color: string) {
   isModalOpen.value = true;
+  receivedColor.value = color;
 }
+
+const store = useItemStore();
+const itemListStore = storeToRefs(store);
+const items = itemListStore.itemList.value;
 </script>
 
 <template>
   <div class="inventory-wrapper">
-    <div class="cell">
-      <item-template :id="1" @open-modal="openModal" />
+    <div class="cell" v-for="i in 25">
+      <item-template
+        v-if="items[i - 1] && items[i - 1].position == i"
+        :item="items[i - 1]"
+        @open-modal="openModal"
+      />
     </div>
-    <div class="cell"><item-template :id="2" /></div>
-    <div class="cell"><item-template :id="3" /></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
   </div>
+
   <Transition name="slide-fade">
     <side-modal
+      :receivedColor="receivedColor"
       class="modal"
       v-if="isModalOpen"
       @close-modal="isModalOpen = false"
@@ -66,6 +57,10 @@ function openModal() {
   justify-content: center;
   border: 1px solid #4d4d4d;
   background-color: #262626;
+
+  &:hover {
+    background-color: #2f2f2f;
+  }
 }
 
 .modal {

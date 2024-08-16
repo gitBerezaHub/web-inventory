@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import ItemImage from "@/components/itemImage.vue";
 import TextSkeleton from "@/components/textSkeleton.vue";
+import { defineProps } from "vue";
+
+const props = defineProps({
+  receivedColor: String,
+});
 </script>
 
 <template>
   <div class="modal-wrapper">
-    <item-image @christ-clicked="$emit('closeModal')" />
+    <item-image
+      @christ-clicked="$emit('closeModal')"
+      :color="props.receivedColor"
+    />
     <hr />
     <text-skeleton />
     <hr />
@@ -31,6 +39,7 @@ hr {
 }
 
 .delete-button {
+  cursor: pointer;
   background-color: #ff8888;
   width: 85%;
   height: 8%;
