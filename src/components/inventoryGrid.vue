@@ -16,15 +16,27 @@ function openModal(color: string) {
 const store = useItemStore();
 const itemListStore = storeToRefs(store);
 const items = itemListStore.itemList.value;
+
+const touchedItem = ref(0);
+function changePosition(position: number) {
+  if (touchedItem.value) {
+    items.filter((item) => item.id === touchedItem.value)[0].position =
+      position;
+  }
+  touchedItem.value = 0;
+}
 </script>
 
 <template>
   <div class="inventory-wrapper">
-    <div class="cell" v-for="i in 25">
+    <div class="cell" v-for="i in 25" :key="i" @mouseup="changePosition(i)">
       <item-template
-        v-if="items[i - 1] && items[i - 1].position == i"
-        :item="items[i - 1]"
+        v-if="items.filter((item) => item.position === i)[0]"
+        :item="items.filter((item) => item.position === i)[0]"
         @open-modal="openModal"
+        @mousedown="
+          touchedItem = items.filter((item) => item.position === i)[0].id
+        "
       />
     </div>
   </div>
@@ -49,6 +61,7 @@ const items = itemListStore.itemList.value;
   grid-template-columns: repeat(5, 20%);
   grid-template-rows: repeat(5, 20%);
   z-index: 1;
+  user-select: none;
 }
 
 .cell {
