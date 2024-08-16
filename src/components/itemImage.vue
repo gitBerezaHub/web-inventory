@@ -29,12 +29,14 @@ const props = defineProps({
 
 .close-svg {
   position: absolute;
+  width: 18px;
+  aspect-ratio: 1/ 1;
   top: 6px;
   right: 6px;
 }
 
 .itemImage {
-  width: 60%;
+  height: 75%;
   aspect-ratio: 1 / 1;
   background-color: #f00;
 }

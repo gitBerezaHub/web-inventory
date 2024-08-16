@@ -39,8 +39,8 @@ function deleteItem() {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 30%;
-  height: 60vw;
+  width: 25%;
+  height: 75vh;
   border: 1px solid #4d4d4d;
   background: #262626;
 }
@@ -59,5 +59,6 @@ hr {
   border: none;
   border-radius: 8px;
   font-size: 17px;
+  margin-bottom: 10px;
 }
 </style>

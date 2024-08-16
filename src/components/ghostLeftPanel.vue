@@ -12,7 +12,7 @@ import TextSkeleton from "@/components/textSkeleton.vue";
 <style scoped lang="scss">
 .wrapper {
   width: 28vw;
-  height: 60vw;
+  height: 75vh;
   background-color: #262626;
   border: 1px solid #4d4d4d;
   border-radius: 12px;

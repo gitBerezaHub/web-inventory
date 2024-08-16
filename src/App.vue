@@ -23,6 +23,7 @@ import GhostBottomPanel from "@/components/ghostBottomPanel.vue";
   background-color: #1d1d1d;
   width: 100vw;
   height: 100vh;
+  font-family: Inter, sans-serif;
 }
 
 main {

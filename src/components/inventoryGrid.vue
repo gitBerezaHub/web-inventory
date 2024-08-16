@@ -41,6 +41,12 @@ function changePosition(position: number) {
           touchedItem = items.filter((item) => item.position === i)[0].id
         "
       />
+      <div
+        class="item-quantity"
+        v-if="items.filter((item) => item.position === i)[0]"
+      >
+        {{ items.filter((item) => item.position === i)[0].quantity }}
+      </div>
     </div>
   </div>
 
@@ -56,8 +62,8 @@ function changePosition(position: number) {
 
 <style scoped lang="scss">
 .inventory-wrapper {
-  width: 60vw;
-  height: 60vw;
+  height: 75vh;
+  width: 60%;
   border: 1px solid #4d4d4d;
   border-radius: 12px;
   display: grid;
@@ -68,9 +74,7 @@ function changePosition(position: number) {
 }
 
 .cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   border: 1px solid #4d4d4d;
   background-color: #262626;
 
@@ -96,5 +100,17 @@ function changePosition(position: number) {
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateX(200px);
+}
+
+.item-quantity {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #4d4d4d;
+  border: 1px solid #4d4d4d;
+  border-radius: 6px 0 0 0;
+  width: 16%;
+  height: 16%;
+  text-align: center;
 }
 </style>
