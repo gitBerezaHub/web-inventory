@@ -4,11 +4,8 @@ import TextSkeleton from "@/components/textSkeleton.vue";
 import { defineProps, PropType } from "vue";
 import { ItemInterface } from "@/interfaces";
 import { useItemStore } from "@/store/itemStore";
-import { storeToRefs } from "pinia";
 
 const store = useItemStore();
-const itemListStore = storeToRefs(store);
-const items = itemListStore.itemList.value;
 
 const props = defineProps({
   receivedItem: {
@@ -16,6 +13,11 @@ const props = defineProps({
     required: true,
   },
 });
+
+function deleteItem() {
+  store.deleteItem(props.receivedItem.id);
+  store.saveItemsData();
+}
 </script>
 
 <template>
@@ -27,16 +29,7 @@ const props = defineProps({
     <hr />
     <text-skeleton />
     <hr />
-    <button
-      class="delete-button"
-      @click="
-        items.filter(
-          (item) => item.id === props.receivedItem.id
-        )[0].quantity -= 1
-      "
-    >
-      Удалить предмет
-    </button>
+    <button class="delete-button" @click="deleteItem">Удалить предмет</button>
   </div>
 </template>
 

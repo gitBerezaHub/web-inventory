@@ -15,6 +15,7 @@ function openModal(item: ItemInterface) {
 }
 
 const store = useItemStore();
+store.loadItemsData();
 const itemListStore = storeToRefs(store);
 const items = itemListStore.itemList.value;
 
@@ -25,6 +26,7 @@ function changePosition(position: number) {
       position;
   }
   touchedItem.value = 0;
+  store.saveItemsData();
 }
 </script>
 

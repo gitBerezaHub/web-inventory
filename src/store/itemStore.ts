@@ -25,4 +25,23 @@ export const useItemStore = defineStore("itemList", {
       ],
     };
   },
+  actions: {
+    saveItemsData() {
+      localStorage.setItem("itemsData", JSON.stringify(this.itemList));
+    },
+    loadItemsData() {
+      const itemsData = localStorage.getItem("itemsData");
+      if (itemsData) {
+        this.itemList = JSON.parse(itemsData);
+      }
+    },
+    deleteItem(id: number) {
+      const certainItemIndex = this.itemList.findIndex(
+        (item) => item.id === id
+      );
+      if (this.itemList[certainItemIndex].quantity > 1) {
+        this.itemList[certainItemIndex].quantity -= 1;
+      }
+    },
+  },
 });
