@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { defineProps, PropType } from "vue";
-interface ItemInterface {
-  id: number;
-  color: string;
-  quantity: number;
-  position: number;
-}
+import { ItemInterface } from "@/interfaces";
 
 const props = defineProps({
   item: {
@@ -18,8 +13,8 @@ const props = defineProps({
 <template>
   <div
     class="item"
-    @click="$emit('openModal', props.item?.color)"
-    :style="`background-color: ${props.item?.color}`"
+    @click="$emit('openModal', props.item)"
+    :style="`background-color: ${props.item.color}`"
   >
     {{ props.item.quantity }}
   </div>

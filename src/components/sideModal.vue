@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import ItemImage from "@/components/itemImage.vue";
 import TextSkeleton from "@/components/textSkeleton.vue";
-import { defineProps } from "vue";
+import { defineProps, PropType } from "vue";
+import { ItemInterface } from "@/interfaces";
+import { useItemStore } from "@/store/itemStore";
+import { storeToRefs } from "pinia";
+
+const store = useItemStore();
+const itemListStore = storeToRefs(store);
+const items = itemListStore.itemList.value;
 
 const props = defineProps({
-  receivedColor: String,
+  receivedItem: {
+    type: Object as PropType<ItemInterface>,
+    required: true,
+  },
 });
 </script>
 
@@ -12,12 +22,21 @@ const props = defineProps({
   <div class="modal-wrapper">
     <item-image
       @christ-clicked="$emit('closeModal')"
-      :color="props.receivedColor"
+      :color="props.receivedItem.color"
     />
     <hr />
     <text-skeleton />
     <hr />
-    <button class="delete-button">Удалить предмет</button>
+    <button
+      class="delete-button"
+      @click="
+        items.filter(
+          (item) => item.id === props.receivedItem.id
+        )[0].quantity -= 1
+      "
+    >
+      Удалить предмет
+    </button>
   </div>
 </template>
 

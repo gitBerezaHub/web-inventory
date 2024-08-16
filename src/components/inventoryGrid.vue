@@ -4,13 +4,14 @@ import SideModal from "@/components/sideModal.vue";
 import { ref } from "vue";
 import { useItemStore } from "@/store/itemStore";
 import { storeToRefs } from "pinia";
+import { ItemInterface } from "@/interfaces";
 
 const isModalOpen = ref(false);
-const receivedColor = ref("#ffffff");
+let receivedItem: ItemInterface;
 
-function openModal(color: string) {
+function openModal(item: ItemInterface) {
   isModalOpen.value = true;
-  receivedColor.value = color;
+  receivedItem = item;
 }
 
 const store = useItemStore();
@@ -43,7 +44,7 @@ function changePosition(position: number) {
 
   <Transition name="slide-fade">
     <side-modal
-      :receivedColor="receivedColor"
+      :receivedItem="receivedItem"
       class="modal"
       v-if="isModalOpen"
       @close-modal="isModalOpen = false"
